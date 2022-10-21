@@ -3,22 +3,21 @@
 import { IndexInterface, DocumentInterface } from "./type.js";
 import { create_object, is_string } from "./common.js";
 
-function async(callback, self, field, key, index_doc, index, data){
+function async(callback, self, field, key, index_doc, index, data) {
 
-    setTimeout(function(){
+    setTimeout(function () {
 
         const res = callback(field ? field + "." + key : key, JSON.stringify(data));
 
         // await isn't supported by ES5
 
-        if(res && res["then"]){
+        if (res && res["then"]) {
 
-            res["then"](function(){
+            res["then"](function () {
 
                 self.export(callback, self, field, index_doc, index + 1);
             })
-        }
-        else{
+        } else {
 
             self.export(callback, self, field, index_doc, index + 1);
         }
@@ -29,11 +28,11 @@ function async(callback, self, field, key, index_doc, index, data){
  * @this IndexInterface
  */
 
-export function exportIndex(callback, self, field, index_doc, index){
+export function exportIndex(callback, self, field, index_doc, index) {
 
     let key, data;
 
-    switch(index || (index = 0)){
+    switch (index || (index = 0)) {
 
         case 0:
 
@@ -41,16 +40,15 @@ export function exportIndex(callback, self, field, index_doc, index){
 
             // fastupdate isn't supported by export
 
-            if(this.fastupdate){
+            if (this.fastupdate) {
 
                 data = create_object();
 
-                for(let key in this.register){
+                for (let key in this.register) {
 
                     data[key] = 1;
                 }
-            }
-            else{
+            } else {
 
                 data = this.register;
             }
@@ -93,25 +91,23 @@ export function exportIndex(callback, self, field, index_doc, index){
  * @this IndexInterface
  */
 
-export function importIndex(key, data){
+export function importIndex(key, data) {
 
-    if(!data){
+    if (!data) {
 
         return;
     }
 
-    if(is_string(data)){
+    if (is_string(data)) {
 
         data = JSON.parse(data);
     }
-
-    switch(key){
+    switch (key) {
 
         case "cfg":
 
             this.optimize = !!data["opt"];
             break;
-
         case "reg":
 
             // fastupdate isn't supported by import
@@ -121,10 +117,27 @@ export function importIndex(key, data){
             break;
 
         case "map":
+            if (Object.keys(this.map[0]).length === 0) {
+                this.map = data;
+            } else {
+                this.map.forEach((map, i) => {
+                    for (let n in this.map[i]) {
+                        if (data[i].hasOwnProperty(n)) {
+                            this.map[i][n] = this.map[i][n].concat(data[i][n])
+                        }
+                    }
+                })
 
-            this.map = data;
+                data.forEach((datas, i) => {
+                    for (let n in data[i]) {
+                        if (!this.map[i].hasOwnProperty(n)) {
+                            this.map[i][n] = data[i][n]
+                        }
+                    }
+                })
+            }
+
             break;
-
         case "ctx":
 
             this.ctx = data;
@@ -136,21 +149,21 @@ export function importIndex(key, data){
  * @this DocumentInterface
  */
 
-export function exportDocument(callback, self, field, index_doc, index){
+export function exportDocument(callback, self, field, index_doc, index) {
 
     index || (index = 0);
     index_doc || (index_doc = 0);
 
-    if(index_doc < this.field.length){
+    if (index_doc < this.field.length) {
 
         const field = this.field[index_doc];
         const idx = this.index[field];
 
         self = this;
 
-        setTimeout(function(){
+        setTimeout(function () {
 
-            if(!idx.export(callback, self, index ? field/*.replace(":", "-")*/ : "", index_doc, index++)){
+            if (!idx.export(callback, self, index ? field/*.replace(":", "-")*/ : "", index_doc, index++)) {
 
                 index_doc++;
                 index = 1;
@@ -158,12 +171,11 @@ export function exportDocument(callback, self, field, index_doc, index){
                 self.export(callback, self, field, index_doc, index);
             }
         });
-    }
-    else{
+    } else {
 
         let key, data;
 
-        switch(index){
+        switch (index) {
 
             case 1:
 
@@ -196,23 +208,27 @@ export function exportDocument(callback, self, field, index_doc, index){
  * @this DocumentInterface
  */
 
-export function importDocument(key, data){
-
-    if(!data){
+export function importDocument(key, data) {
+    if (!data) {
 
         return;
     }
 
-    if(is_string(data)){
+    if (is_string(data)) {
 
         data = JSON.parse(data);
     }
-
-    switch(key){
+    key = key.replace(/(\w+\.)(store|tag)/, "$2");
+    switch (key) {
 
         case "tag":
+            if (!this.tagindex) {
+                this.tagindex = data;
+            } else {
+                const tagKey = Object.keys(data)[0];
+                this.tagindex[tagKey] = data[tagKey];
+            }
 
-            this.tagindex = data;
             break;
 
         case "reg":
@@ -222,7 +238,7 @@ export function importDocument(key, data){
             this.fastupdate = false;
             this.register = data;
 
-            for(let i = 0, index; i < this.field.length; i++){
+            for (let i = 0, index; i < this.field.length; i++) {
 
                 index = this.index[this.field[i]];
                 index.register = data;
@@ -232,8 +248,12 @@ export function importDocument(key, data){
             break;
 
         case "store":
-
-            this.store = data;
+            if (!this.store) {
+                this.store = data;
+            } else {
+                const storeKey = Object.keys(data)[0];
+                this.store[storeKey] = data[storeKey];
+            }
             break;
 
         default:
@@ -241,9 +261,7 @@ export function importDocument(key, data){
             key = key.split(".");
             const field = key[0];
             key = key[1];
-
-            if(field && key){
-
+            if (field && key) {
                 this.index[field].import(key, data);
             }
     }

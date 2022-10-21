@@ -125,7 +125,7 @@ let parameter = (function(opt){
     return parameter;
 })({
 
-    compilation_level: compilation_level || "ADVANCED_OPTIMIZATIONS", //"SIMPLE"
+    compilation_level: "SIMPLE", //"SIMPLE"
     use_types_for_optimization: true,
     //new_type_inf: true,
     //jscomp_warning: "newCheckTypes",

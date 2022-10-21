@@ -28,7 +28,7 @@ Read the documentation of new language encoding features:<br>
 
 <h1></h1>
 
-When it comes to raw search speed <a href="https://nextapps-de.github.io/flexsearch/bench/" target="_blank">FlexSearch outperforms every single searching library out there</a> and also provides flexible search capabilities like multi-field search, phonetic transformations or partial matching. 
+When it comes to raw search speed <a href="https://nextapps-de.github.io/flexsearch/bench/" target="_blank">FlexSearch outperforms every single searching library out there</a> and also provides flexible search capabilities like multi-field search, phonetic transformations or partial matching.
 
 Depending on the used <a href="#options">options</a> it also provides the <a href="#memory">most memory-efficient index</a>. FlexSearch introduce a new scoring algorithm called <a href="#contextual">"contextual index"</a> based on a <a href="#dictionary">pre-scored lexical dictionary</a> architecture which actually performs queries up to 1,000,000 times faster compared to other libraries.
 FlexSearch also provides you a non-blocking asynchronous processing model as well as web workers to perform any updates or queries on the index in parallel through dedicated balanced threads.
@@ -39,6 +39,7 @@ FlexSearch Server is available here:
 -->
 
 Supported Platforms:
+
 - Browser
 - Node.js
 
@@ -48,11 +49,13 @@ Demos:
 -->
 
 Library Comparison "Gulliver's Travels":
+
 - <a href="https://nextapps-de.github.io/flexsearch/bench/" target="_blank">Performance Benchmark</a>
 - <a href="https://nextapps-de.github.io/flexsearch/bench/match.html" target="_blank">Scoring Benchmark</a>
 - <a href="#consumption">Memory Consumption</a>
 
 Plugins (extern projects):
+
 - https://github.com/angeloashmore/react-use-flexsearch
 - https://www.gatsbyjs.org/packages/gatsby-plugin-flexsearch/
 
@@ -266,7 +269,7 @@ Operation per seconds, higher is better, except the test "Memory" on which lower
         <td>Query (Multi Term)</td>
         <td>Query (Long)</td>
         <td>Query (Dupes)</td>
-        <td>Query (Not Found)</td>	
+        <td>Query (Not Found)</td>
     </tr>
     <tr>
         <td>1</td>
@@ -391,6 +394,7 @@ Operation per seconds, higher is better, except the test "Memory" on which lower
 </table>
 
 <a name="contextual"></a>
+
 ## Contextual Search
 
 > __Note:__ This feature is disabled by default because of its extended memory usage. Read <a href="#contextual_enable">here</a> get more information about and how to enable.
@@ -404,6 +408,7 @@ This way contextual search also <a href="https://nextapps-de.github.io/flexsearc
 </p>
 
 <a name="installation"></a>
+
 ## Load Library
 
 There are 3 types of indexes:
@@ -437,6 +442,7 @@ const worker = new WorkerIndex(options);
 ```
 
 Or via CDN:
+
 ```html
 <script src="https://cdn.jsdelivr.net/gh/nextapps-de/flexsearch@0.7.31/dist/flexsearch.bundle.js"></script>
 ```
@@ -507,6 +513,7 @@ The `worker` inherits from type `Index` and does not inherit from type `Document
 > Every method called on a `Worker` index is treated as async. You will get back a `Promise` or you can provide a callback function as the last parameter alternatively.
 
 <a name="api"></a>
+
 ## API Overview
 
 Global methods:
@@ -562,11 +569,13 @@ Async methods will return a `Promise`, alternatively you can pass a callback fun
 Methods `export` and also `import` are always async as well as every method you call on a Worker-based Index.
 
 <a name="options"></a>
+
 ## Options
 
 FlexSearch is highly customizable. Make use of the right options can really improve your results as well as memory economy and query time.
 
 <a name="options-index"></a>
+
 ### Index Options
 
 <table>
@@ -753,6 +762,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="options-context"></a>
+
 ### Context Options
 
 <table>
@@ -793,6 +803,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="options-document"></a>
+
 ### Document Options
 
 <table>
@@ -819,20 +830,21 @@ FlexSearch is highly customizable. Make use of the right options can really impr
     <tr></tr>
     <tr>
         <td>index<br><br><br></td>
-        <td>String<br>Array&lt;String><br>Array&lt;Object></td>
+        <td>String<br>Array<String><br>Array<Object></td>
         <td vertical-align="top"></td>
         <td></td>
     </tr>
     <tr></tr>
     <tr>
         <td>store<br><br><br></td>
-        <td>Boolean<br>String<br>Array&lt;String></td>
+        <td>Boolean<br>String<br>Array<String></td>
         <td vertical-align="top"></td>
         <td>false</td>
     </tr>
 </table>
 
 <a name="options-charset"></a>
+
 ### Charset Options
 
 <table>
@@ -876,6 +888,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="options-language"></a>
+
 ### Language Options
 
 <table>
@@ -917,6 +930,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="options-search"></a>
+
 ### Search Options
 
 <table>
@@ -950,6 +964,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="options-field-search"></a>
+
 ### Document Search Options
 
 * Additionally, to the Index search options above.
@@ -964,14 +979,14 @@ FlexSearch is highly customizable. Make use of the right options can really impr
     </tr>
     <tr>
         <td>index</td>
-        <td>String<br>Array&lt;String&gt;<br>Array&lt;Object&gt;</td>
+        <td>String<br>Array<String><br>Array<Object></td>
         <td>Sets the <a href="#docs">document fields</a> which should be searched. When no field is set, all fields will be searched. <a href="#options-field-search">Custom options per field</a> are also supported.</td>
         <td></td>
     </tr>
     <tr></tr>
     <tr>
         <td>tag</td>
-        <td>String<br>Array&lt;String></td>
+        <td>String<br>Array<String></td>
         <td>Sets the <a href="#docs">document fields</a> which should be searched. When no field is set, all fields will be searched. <a href="#options-field-search">Custom options per field</a> are also supported.</td>
         <td>false</td>
     </tr>
@@ -992,6 +1007,7 @@ FlexSearch is highly customizable. Make use of the right options can really impr
 </table>
 
 <a name="tokenizer"></a>
+
 ## Tokenizer (Prefix Search)
 
 Tokenizer affects the required memory also as query time and flexibility of partial matches. Try to choose the most upper of these tokenizer which fits your needs:
@@ -1034,6 +1050,7 @@ Tokenizer affects the required memory also as query time and flexibility of part
 </table>
 
 <a name="phonetic"></a>
+
 ## Encoders
 
 Encoding affects the required memory also as query time and phonetic matches. Try to choose the most upper of these encoders which fits your needs, or pass in a <a href="#flexsearch.encoder">custom encoder</a>:
@@ -1099,6 +1116,7 @@ Encoding affects the required memory also as query time and phonetic matches. Tr
 ## Usage
 
 <a name="flexsearch.create"></a>
+
 #### Create a new index
 
 ```js
@@ -1134,6 +1152,7 @@ var index = new FlexSearch({
 <a href="#options">See all available custom options.</a>
 
 <a name="index.add"></a>
+
 #### Add text item to an index
 
 Every content which should be added to the index needs an ID. When your content has no ID, then you need to create one by passing an index or count or something else as an ID (a value from type `number` is highly recommended). Those IDs are unique references to a given content. This is important when you update or adding over content through existing IDs. When referencing is not a concern, you can simply use something simple like `count++`.
@@ -1145,6 +1164,7 @@ index.add(0, "John Doe");
 ```
 
 <a name="index.search"></a>
+
 #### Search items
 
 > Index.__search(string | options, \<limit\>, \<options\>)__
@@ -1170,6 +1190,7 @@ if(index.contain(1)){
 ```
 
 <a name="async_search"></a>
+
 ## Async
 
 You can call each method in its async version, e.g. `index.addAsync` or `index.searchAsync`.
@@ -1239,6 +1260,7 @@ When you query `index.search("index")` then you will get index id 1 as the first
 If you didn't want this behavior than just use the standard `index.add(id, content)` and provide the full length of content.
 
 <a name="index.update"></a>
+
 #### Update item from an index
 
 > Index.__update(id, string)__
@@ -1248,6 +1270,7 @@ index.update(0, "Max Miller");
 ```
 
 <a name="index.remove"></a>
+
 #### Remove item from an index
 
 > Index.__remove(id)__
@@ -1257,11 +1280,13 @@ index.remove(0);
 ```
 
 <a name="flexsearch.tokenizer"></a>
+
 #### Add custom tokenizer
 
 > A tokenizer split words/terms into components or partials.
 
 Define a private custom tokenizer during creation/initialization:
+
 ```js
 var index = new FlexSearch({
 
@@ -1275,6 +1300,7 @@ var index = new FlexSearch({
 > The tokenizer function gets a string as a parameter and has to return an array of strings representing a word or term. In some languages every char is a term and also not separated via whitespaces.
 
 <a name="flexsearch.language"></a>
+
 #### Add language-specific stemmer and/or filter
 
 > __Stemmer:__ several linguistic mutations of the same word (e.g. "run" and "running")
@@ -1282,6 +1308,7 @@ var index = new FlexSearch({
 > __Filter:__ a blacklist of words to be filtered out from indexing at all (e.g. "and", "to" or "be")
 
 Assign a private custom stemmer or filter during creation/initialization:
+
 ```js
 var index = new FlexSearch({
 
@@ -1307,6 +1334,7 @@ var index = new FlexSearch({
 ```
 
 Using a custom filter, e.g.:
+
 ```js
 var index = new FlexSearch({
 
@@ -1332,6 +1360,7 @@ FlexSearch.registerLanguage("us", {
 ```
 
 Or use some pre-defined stemmer or filter of your preferred languages:
+
 ```html
 <html>
 <head>
@@ -1343,6 +1372,7 @@ Or use some pre-defined stemmer or filter of your preferred languages:
 ```
 
 Now you can assign built-in stemmer during creation/initialization:
+
 ```js
 var index_en = new FlexSearch.Index({
     language: "en"
@@ -1364,6 +1394,7 @@ var index_en = new Index({
 ```
 
 <a name="rtl"></a>
+
 ### Right-To-Left Support
 
 > Set the tokenizer at least to "reverse" or "full" when using RTL.
@@ -1379,6 +1410,7 @@ var index = new Index({
 ```
 
 <a name="cjk"></a>
+
 ### CJK Word Break (Chinese, Japanese, Korean)
 
 Set a custom tokenizer which fits your needs, e.g.:
@@ -1400,6 +1432,7 @@ var results = index.search("单词");
 ```
 
 <a name="docs"></a>
+
 ## Index Documents (Field-Search)
 
 ### The Document Descriptor
@@ -1561,6 +1594,7 @@ const index = new Document({
     }
 });
 ```
+
 > Just add fields you want to query against. Do not add fields to the index, you just need in the result (but did not query against). For this purpose you can store documents independently of its index (read below).
 
 When you want to query through a field you have to pass the exact key of the field you have defined in the `doc` as a field name (with colon syntax):
@@ -2139,6 +2173,7 @@ Your results are now looking like:
 Both field "author" and "email" are not indexed.
 
 <a name="chaining"></a>
+
 ### Chaining
 
 Simply chain methods like:
@@ -2155,9 +2190,11 @@ index.remove(0).update(1, 'foo').add(2, 'foobar');
 ```
 
 <a name="contextual_enable"></a>
+
 ## Enable Contextual Scoring
 
 Create an index and use the default context:
+
 ```js
 var index = new FlexSearch({
 
@@ -2167,6 +2204,7 @@ var index = new FlexSearch({
 ```
 
 Create an index and apply custom options for the context:
+
 ```js
 var index = new FlexSearch({
 
@@ -2184,6 +2222,7 @@ var index = new FlexSearch({
 > The contextual index requires <a href="#memory">additional amount of memory</a> depending on depth.
 
 <a name="cache"></a>
+
 ### Auto-Balanced Cache (By Popularity)
 
 You need to initialize the cache and its limit during the creation of the index:
@@ -2203,11 +2242,13 @@ A common scenario for using a cache is an autocomplete or instant search when ty
 > When just using "true" the cache is unbounded and perform actually 2-3 times faster (because the balancer do not have to run).
 
 <a name="webworker"></a>
+
 ## Worker Parallelism (Browser + Node.js)
 
 The new worker model from v0.7.0 is divided into "fields" from the document (1 worker = 1 field index). This way the worker becomes able to solve tasks (subtasks) completely. The downside of this paradigm is they might not have been perfect balanced in storing contents (fields may have different length of contents). On the other hand there is no indication that balancing the storage gives any advantage (they all require the same amount in total).
 
 When using a document index, then just apply the option "worker":
+
 ```js
 const index = new Document({
     index: ["tag", "name", "title", "text"],
@@ -2347,6 +2388,7 @@ Of course, you can do that but keep in mind that the main thread does not have a
 > When adding/updating/removing large bulks of content to the index (or high frequency), it is recommended to use the async version along with `async/await` to keep a low memory footprint during long processes.
 
 <a name="export"></a>
+
 ## Export / Import
 
 ### Export
@@ -2355,10 +2397,10 @@ The export has slightly changed. The export now consist of several smaller parts
 
 ```js
 index.export(function(key, data){ 
-    
+  
     // you need to store both the key and the data!
     // e.g. use the key for the filename and save your data
-    
+  
     localStorage.setItem(key, data);
 });
 ```
@@ -2371,9 +2413,9 @@ When your save routine runs asynchronously you have to return a promise:
 
 ```js
 index.export(function(key, data){ 
-    
+  
     return new Promise(function(resolve){
-        
+      
         // do the saving as async
 
         resolve();
@@ -2405,7 +2447,7 @@ This is just for demonstration and is not recommended, because you might have ot
 var keys = Object.keys(localStorage);
 
 for(let i = 0, key; i < keys.length; i++){
-    
+  
     key = keys[i];
     index.import(key, localStorage.getItem(key));
 }
@@ -2416,12 +2458,12 @@ for(let i = 0, key; i < keys.length; i++){
 Language-specific definitions are being divided into two groups:
 
 1. Charset
-    1. ___encode___, type: `function(string):string[]`
-    2. ___rtl___, type: `boolean`
+   1. ___encode___, type: `function(string):string[]`
+   2. ___rtl___, type: `boolean`
 2. Language
-    1. ___matcher___, type: `{string: string}`
-    2. ___stemmer___, type: `{string: string}`
-    3. ___filter___, type: `string[]`
+   1. ___matcher___, type: `{string: string}`
+   2. ___stemmer___, type: `{string: string}`
+   3. ___filter___, type: `string[]`
 
 The charset contains the encoding logic, the language contains stemmer, stopword filter and matchers. Multiple language definitions can use the same charset encoder. Also this separation let you manage different language definitions for special use cases (e.g. names, cities, dialects/slang, etc.).
 
@@ -2656,7 +2698,7 @@ Search for your language in `src/lang/`, if it exists you can extend or provide 
 A new charset should provide at least:
 
 1. `encode` A function which normalize the charset of a passed text content (remove special chars, lingual transformations, etc.) and __returns an array of separated words__. Also stemmer, matcher or stopword filter needs to be applied here. When the language has no words make sure to provide something similar, e.g. each chinese sign could also be a "word". Don't return the whole text content without split.
-3. `rtl` A boolean flag which indicates right-to-left encoding
+2. `rtl` A boolean flag which indicates right-to-left encoding
 
 Basically the charset needs just to provide an encoder function along with an indicator for right-to-left encoding:
 
@@ -2776,6 +2818,7 @@ export const rtl = false;
 </table>
 
 <a name="memory"></a>
+
 ## Memory Allocation
 
 The book "Gulliver's Travels Swift Jonathan 1726" was fully indexed for the examples below.
@@ -2797,6 +2840,7 @@ index = new Index({
 ```
 
 <a name="consumption"></a>
+
 ### Memory Consumption
 
 The book "Gulliver's Travels" (Swift Jonathan 1726) was completely indexed for this test:
@@ -3035,6 +3079,7 @@ FlexSearch provides you many parameters you can use to adjust the optimal balanc
 ** range from -10 to 10, higher is better
 
 <a name="presets"></a>
+
 ## Presets
 
 1. `memory` (primary optimize for memory)
@@ -3045,7 +3090,7 @@ FlexSearch provides you many parameters you can use to adjust the optimal balanc
 
 These profiles are covering standard use cases. It is recommended to apply custom configuration instead of using profiles to get the best out for your situation. Every profile could be optimized further to its specific task, e.g. extreme performance optimized configuration or extreme memory and so on.
 
-You can pass a preset during creation/initialization of the index. 
+You can pass a preset during creation/initialization of the index.
 
 <!--
 Compare these presets:
@@ -3089,6 +3134,7 @@ function search(cat, query){
 ```
 
 Add content to the index:
+
 ```js
 add(1, "action", "Movie Title");
 add(2, "adventure", "Movie Title");
@@ -3096,6 +3142,7 @@ add(3, "comedy", "Movie Title");
 ```
 
 Perform queries:
+
 ```js
 var results = search("action", "movie title"); // --> [1]
 ```

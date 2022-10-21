@@ -1,10 +1,3 @@
-/**!
- * FlexSearch.js v0.7.31 (Debug)
- * Copyright 2018-2022 Nextapps GmbH
- * Author: Thomas Wilkerling
- * Licence: Apache-2.0
- * https://github.com/nextapps-de/flexsearch
- */
 (function(self){'use strict';
 function r(a, b) {
   return "undefined" !== typeof a ? a : b;
@@ -507,7 +500,7 @@ L.prototype.export = function(a, b, c, d, e) {
 };
 L.prototype.import = function(a, b) {
   if (b) {
-    switch(x(b) && (b = JSON.parse(b)), a) {
+    switch(x(b) && (b = JSON.parse(b)), console.log(a), a) {
       case "cfg":
         this.optimize = !!b.opt;
         break;
@@ -523,6 +516,18 @@ L.prototype.import = function(a, b) {
         }), b.forEach((c, d) => {
           for (let e in b[d]) {
             this.map[d].hasOwnProperty(e) || (this.map[d][e] = b[d][e]);
+          }
+        }));
+        break;
+      case "store":
+        console.log(b);
+        0 === Object.keys(this.store[0]).length ? this.store = b : (this.store.forEach((c, d) => {
+          for (let e in this.store[d]) {
+            b[d].hasOwnProperty(e) && (this.store[d][e] = this.store[d][e].concat(b[d][e]));
+          }
+        }), b.forEach((c, d) => {
+          for (let e in b[d]) {
+            this.store[d].hasOwnProperty(e) || (this.store[d][e] = b[d][e]);
           }
         }));
         break;
@@ -886,9 +891,9 @@ R.prototype.export = function(a, b, c, d, e) {
 };
 R.prototype.import = function(a, b) {
   if (b) {
-    switch(x(b) && (b = JSON.parse(b)), a = a.replace(/(\w+\.)(store|tag)/, "$2"), a) {
+    switch(x(b) && (b = JSON.parse(b)), console.log(a), a) {
       case "tag":
-        this.tagindex ? (a = Object.keys(b)[0], this.tagindex[a] = b[a]) : this.tagindex = b;
+        this.tagindex = b;
         break;
       case "reg":
         this.fastupdate = !1;
@@ -898,7 +903,7 @@ R.prototype.import = function(a, b) {
         }
         break;
       case "store":
-        this.store ? (a = Object.keys(b)[0], this.store[a] = b[a]) : this.store = b;
+        this.store = b;
         break;
       default:
         a = a.split(".");

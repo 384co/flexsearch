@@ -1,5 +1,5 @@
 /** @define {boolean} */
-export const DEBUG = false;
+export const DEBUG = true;
 
 /** @define {boolean} */
 export const POLYFILL = false;

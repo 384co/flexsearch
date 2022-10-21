@@ -17,6 +17,7 @@ import charset_extra from "./lang/latin/extra.js"
 /** @export */ Document.prototype.contain;
 /** @export */ Document.prototype.get;
 /** @export */ Document.prototype.set;
+/** @export */ Document.prototype.push_index;
 
 /** @export */ Index.prototype.add;
 /** @export */ Index.prototype.append;

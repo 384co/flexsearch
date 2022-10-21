@@ -19,7 +19,7 @@
   "ignore": [
     "config/**"
   ],
-  "minified": true,
-  "compact": true,
+  "minified": false,
+  "compact": false,
   "comments": false
 }

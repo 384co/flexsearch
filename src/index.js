@@ -233,11 +233,11 @@ Index.prototype.add = function(id, content, _append, _skip_update){
 
                                 score = Math.min((score / this.boost(content, term, i)) | 0, resolution - 1);
                             }
-
+                            //console.log('dupes', dupes)
                             this.push_index(dupes, term, score, id, _append);
 
                             // context is just supported by tokenizer "strict"
-
+                            //console.log('depth',depth)
                             if(depth){
 
                                 if((length > 1) && (i < (length - 1))){
